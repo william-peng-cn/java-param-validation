@@ -21,21 +21,7 @@ public class BeanValidAdvice {
     @Autowired
     private BeanValidator beanValidator;
 
-
-    @Pointcut(
-            "@annotation(ParamValid)" +
-                    //"@within(org.springframework.stereotype.Component)" +
-                    //"execution(*  *(..))" +
-                    //"execution(**  io..*(..)) " +
-                    //"&& @args(javax.validation.Valid, ..)" +
-                    //" @args(javax.validation.Valid)" +
-                    //"&& args(io.pjj.springdemo.aop.validator.Person)" +
-                    //"&& args(io.pjj.springdemo.aop.validator.Person,io.pjj.springdemo.aop.validator.Person)" +
-                    "")
-    public void perform() {
-    }
-
-    @Before("perform()")
+    @Before("@annotation(io.pjj.paramvalidation.ParamValid)")
     public void validateParams(JoinPoint joinPoint) {
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
